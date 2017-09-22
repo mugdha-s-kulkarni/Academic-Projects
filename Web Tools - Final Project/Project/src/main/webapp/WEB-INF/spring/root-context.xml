@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="employerValidator" class="com.mugdha.project.controller.EmployerValidator"></bean>
+	<bean id="jobSeekerValidator" class="com.mugdha.project.controller.JobSeekerValidator"></bean>
+	<bean id="jobValidator" class="com.mugdha.project.controller.JobValidator"></bean>
+	<bean id="profileValidator" class="com.mugdha.project.controller.ProfileValidator"></bean>
+		
+	<bean id="jobSeekerDAO" class="com.mugdha.project.DAO.JobSeekerDAO"></bean>
+	<bean id="jobDAO" class="com.mugdha.project.DAO.JobDAO"></bean>
+	<bean id="employerDAO" class="com.mugdha.project.DAO.EmployerDAO"></bean>
+	<bean id="profileDAO" class="com.mugdha.project.DAO.ProfileDAO"></bean>
+	<bean id="jobSeeker_jobDAO" class="com.mugdha.project.DAO.JobSeeker_JobDAO"></bean>
+</beans>
