@@ -1,0 +1,863 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>LFC History</title>
+
+        <!-- Bootstrap -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/demo.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/footer.css">
+        
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+        <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/assets/css/sidebar.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <style type="text/css">
+
+        body{
+          background-image: url("${pageContext.request.contextPath}/resources/assets/images/anfield.jpg");
+        }
+
+        #main{
+            margin-left: 50px; 
+            margin-right: 50px;
+            background-color: #fffff6;
+        }
+
+            #breadcrumb {
+            margin-left: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-top: 0;
+            height: 50px;;
+            background-color: #fffff6;
+    }
+        .container {
+             width:60%; 
+             margin: auto;
+             
+
+        }
+        .panel-heading{
+            background-color: #00A398;
+        }
+        #year{
+            color: #D00027;
+            font-size: 1.2em;
+        }
+        #YEAR {
+            color: #00A398;
+            font-size: 1.5em;
+        }
+        
+        i{
+            color: #DAA520;
+        }
+
+    </style>
+    </head>
+  <body>
+    
+    <div id="main">
+        <!-- Header -->
+
+     <nav class="navbar navbar-default navbar-inverse"
+                style="margin-bottom: 0px; background-color: #D00027;">
+
+                
+                <ul style="margin-left: 10px;" style="margin-left: 10px;"
+                    class="nav navbar-nav">
+                    <li class="active"><a style="font-size: 17px;"
+                        href="index.html"> Home <i class="glyphicon glyphicon-home"
+                            aria-hidden="true"></i>
+                    </a></li>
+                    <li><a style="font-size: 16px;" href="#">Team</a></li>
+                    <li><a style="font-size: 16px;" href="gallery.html">Gallery
+                    </a></li>
+
+                    <li class="dropdown"><a style="font-size: 16px;" href="#"
+                        class="dropdown-toggle" data-toggle="dropdown" role="button"
+                        aria-haspopup="true" aria-expanded="false">Fans <span
+                            class="caret"></span></a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="membership.html">Membership</a></li>
+                            <li><a href="fan_experience.html">Fan Experience</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                    <li><a style="font-size: 16px;" href="league_table.html">Match</a></li>
+                    <li class="dropdown"><a style="font-size: 16px;" href="merchandize.html"
+                        class="dropdown-toggle" data-toggle="dropdown" role="button"
+                        aria-haspopup="true" aria-expanded="false">Merchandize <span
+                            class="caret"></span></a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="merchandize.html">Shop</a></li>
+                            <li><a href="lfc_clothing.html">Clothing</a></li>
+                            <li><a href="kits.html">Kits</a></li>
+                        </ul>
+                    </li>
+                    <li><a style="font-size: 16px;" href="#">Fixtures</a></li>
+                    <li class="dropdown"><a style="font-size: 16px;" href="#"
+                        class="dropdown-toggle" data-toggle="dropdown" role="button"
+                        aria-haspopup="true" aria-expanded="false">About Us <span
+                            class="caret"></span></a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="aboutUs.html">Key people in LFC</a></li>
+                            <li><a href="history.html">History</a></li>
+                            <li><a href="honours.html">Honours</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul style="margin-right: 10px;" class="nav navbar-nav navbar-right">
+                    <c:choose>
+                        <c:when test="${!empty sessionScope.firstName}">
+                            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                            <li><a style="font-size: 17px;" href="logout.html">Logout</a></li>
+                        </c:when>
+
+                        <c:otherwise>
+                            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                            <li class="active"><a style="font-size: 17px;" href="login.html"> Login
+                                    <i class="glyphicon glyphicon-user" aria-hidden="true"> </i>
+                            </a></li>
+                            <li><a style="font-size: 17px;" href="register.html">Register</a></li>
+                        </c:otherwise>
+                </c:choose>
+                </ul>
+
+            </nav>
+
+            <!-- Navbar End -->  
+      <!--Breadcrumb -->
+
+      <div id="breadcrumb">
+
+                <ol style="height: 45px;" class="breadcrumb">
+                    <span style="margin-left: 10px;">You are here:</span>
+                    <li class="active"><a href="index.html">Home</a></li>
+
+
+                    <span style="float: right;"> <a target="_blank"
+                        href="http://www.facebook.com/LiverpoolFC"> <img
+                            src="${pageContext.request.contextPath}/resources/assets/images/fb.jpg" hspace="5px;" />
+                    </a> <a target="_blank" href="https://twitter.com/lfc?lang=en"> <img
+                            style="height: 30px;" hspace="5px;"
+                            src="${pageContext.request.contextPath}/resources/assets/images/twitter.jpg" /></a> <a target="_blank"
+                        href="https://www.instagram.com/liverpoolfc/?hl=en"> <img
+                            style="height: 30px;" hspace="5px;"
+                            src="${pageContext.request.contextPath}/resources/assets/images/instagram.jpg" /></a> <a target="_blank"
+                        href="https://plus.google.com/+LiverpoolFC/videos"> <img
+                            style="height: 30px;" hspace="5px;"
+                            src="${pageContext.request.contextPath}/resources/assets/images/gplus.jpg" /></a> <a target="_blank"
+                        href="https://www.youtube.com/user/LiverpoolFC"> <img
+                            style="height: 25px;" hspace="5px;"
+                            src="${pageContext.request.contextPath}/resources/assets/images/youtube.jpg" /></a>
+                    </span>
+                </ol>
+
+            </div>
+
+      <!-- BreadCrumb End -->
+   
+    <!-- End Header -->
+
+    <br><br><br>
+<div style="margin-left:380px;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mjTCsNotRmU" frameborder="15px" allowfullscreen>
+</iframe>
+    <h3>Liverpool club in this short documentary.</h3>
+</div>
+<br><br><br>
+    
+<div >
+<div class="container">
+  <h2>Red's Major Events in the History</h2>
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <h1 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" id="YEAR">1890s 
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+        </a>
+        </h1>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">1892</span></b> Liverpool Football Club is formed
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1892</span></b> Reds win first ever game
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1893</span></b> First game in Football League
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1894</span></b> Promotion won at first attempt
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1896</span></b> Reds achieve record victory
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1896</span></b> Tom Watson arrives as manager
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title" >
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" id="YEAR">1900s
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+          </a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">1901</span></b> Reds crowned champions for first time
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1906</span></b> Title returns to Anfield
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" id="YEAR">1910s</a>
+        </h4>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">1914</span></b> Reds reach first FA Cup final
+        </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4" id="YEAR">1920s
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+          </a>
+        </h4>
+      </div>
+      <div id="collapse4" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">1922</span></b> Third title win secured
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1923</span></b> Back to back title triumphs for Reds
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1928</span></b> Spion Kop gets a roof
+        </div>
+        </div>
+  </div>
+
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5" id="YEAR">1930s</a>
+        </h4>
+      </div>
+      <div id="collapse5" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">1938</span></b> Balmer nets quickest goal
+        </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse6" id="YEAR">1940s
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+          </a>
+        </h4>
+      </div>
+      <div id="collapse6" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">1946</span></b> Stubbins arrives in record deal
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1946</span></b> Balmer hits a treble treble
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1947</span></b> Reds confirmed as post war champions
+        </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse7" id="YEAR">1950s</a>
+        </h4>
+      </div>
+      <div id="collapse7" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">1950</span></b> Reds endure Cup final misery
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1952</span></b> Anfield sets a new record
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1954</span></b> Reds relegated from top flight
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1954</span></b> Reds suffer record defeat
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1959</span></b> Humiliation against lowly Worcester
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1959</span></b> Shankly signs in at Anfield
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1959</span></b> Shankly signs in at Anfield
+        </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse8" id="YEAR">1960s
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+          </a>
+        </h4>
+      </div>
+      <div id="collapse8" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">1961</span></b> Transfer record smashed again
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1962</span></b> Reds promoted from Division Two
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1964</span></b> Title won for sixth time
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1964</span></b> Charity Shield shared with West Ham
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1964</span></b> Reds sport all-red kit for first time
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1965</span></b> 73 year wait for Cup glory ends
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1965</span></b> Reds and United share Shield
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1966</span></b> Title reclaimed after Chelsea win
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1966</span></b> Reds lose first European final
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1966</span></b> Shield success for Reds
+        </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse9" id="YEAR">1970s
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+          </a>
+        </h4>
+      </div>
+      <div id="collapse9" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">1973</span></b> Eighth league title secured
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1973</span></b> Europe conquered as Reds land UEFA Cup
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1974</span></b> FA Cup returns to Anfield
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1974</span></b> Sensation as Shankly resigns
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1974</span></b> Paisley takes over in the hot-seat
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1974</span></b> Shoot-out glory lands Shield
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1974</span></b> Rampant Reds net eleven
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1976</span></b> Ninth title clinched at Molineux
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1976</span></b> UEFA Cup won for second time
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1976</span></b> Reds beat Saints to win Shield
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1977</span></b> Ten titles for Reds after Hammers draw
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1977</span></b> Reds conquer Rome to win European Cup
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1977</span></b> Kenny arrives from Celtic
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1977</span></b> Shield shared with Man United
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1977</span></b> 6-0 win secures Super Cup success
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1978</span></b> League Cup replay agony for Reds
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1978</span></b> Wembley glory as Reds beat Bruges
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1979</span></b> Villa victory seals league triumph
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1979</span></b> Arsenal gunned down in Charity Shield
+        </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse10" id="YEAR">1980s
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+          </a>
+        </h4>
+      </div>
+      <div id="collapse10" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">1980</span></b> Reds clinch twelfth title
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1980</span></b> Charity Shield returns to Anfield
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1981</span></b> League Cup bogey is buried
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1981</span></b> Kennedy the hero as Reds beat Madrid
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1982</span></b> Reds retain League Cup with Spurs win
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1982</span></b> 13th title heads to Anfield
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1982</span></b> Charity Shield is won again
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1983</span></b> Paisley lands League Cup with Man U victory
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1983</span></b> Reds win 14th title as Paisley bows out
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1984</span></b> Joy for Reds in first all-Merseyside final
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1984</span></b> Fagan leads Reds to title glory
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1984</span></b> Kennedy the spot kick hero in Rome
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1985</span></b> Fagan steps down after Heysel tragedy
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1986</span></b> Kenny leads Reds to double
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1986</span></b> Shield shared with Everton
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1988</span></b> 17th title secured against Tottenham
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1988</span></b> Agony for Aldo as Reds lose final
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1988</span></b> Joy for Aldo as Shield is secured
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1989</span></b> Hillsborough - Our darkest day
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1989</span></b> Rush nets twice as Reds win Cup
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1989</span></b> Last gasp Thomas breaks Liverpool hearts
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1989</span></b> Reds beat Arsenal to win Charity Shield
+        </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse11" id="YEAR">1990s
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+          </a>
+        </h4>
+      </div>
+      <div id="collapse11" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">1990</span></b> Reds clinch 18th league title
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1990</span></b> Shield shared with Man United
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1991</span></b> Kenny quits as Liverpool manager
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1992</span></b> Thomas and Rush land fifth Cup
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1992</span></b> Rush sets new scoring record
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1994</span></b> Fans stand on Kop for final time
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1995</span></b> Macca double lands League Cup
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1996</span></b> Owen and Carra help win Youth Cup
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1997</span></b> Owen becomes club's youngest goalscorer
+        </div>
+        <div class="panel-body">
+            <b><span id="year">1998</span></b> Houllier arrives as joint manager
+        </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse12" id="YEAR">2000s
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+          </a>
+        </h4>
+      </div>
+      <div id="collapse12" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">2001</span></b> Reds beat Birmingham in Cardiff
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2001</span></b> Owen wins Cup against Arsenal
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2001</span></b> Dortmund delight as Reds win thriller
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2001</span></b> Reds beat United to win Charity Shield
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2001</span></b> Super Cup is back at Anfield for second time
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2003</span></b> Gerrard and Owen beat United in Cardiff
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2004</span></b> Rafa arrives at Anfield
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2005</span></b> The miracle of Istanbul
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2005</span></b> Reds beat Moscow to win Super Cup
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2006</span></b> Youth Cup glory for Reds
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2006</span></b> Heroic Reds win best ever Cup final
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2006</span></b> Reds beat Chelsea to win Community Shield
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2007</span></b> Hicks and Gillett arrive at Anfield
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2007</span></b> Youngsters retain Youth Cup
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2007</span></b> Athens agony as Reds lose to Milan
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2007</span></b> Transfer record smashed as Torres signs in
+        </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse13" id="YEAR">2010s
+            <i class="fa fa-trophy pull-right" aria-hidden="true"></i>
+          </a>
+        </h4>
+      </div>
+      <div id="collapse13" class="panel-collapse collapse">
+        <div class="panel-body">
+            <b><span id="year">2010</span></b> Benitez leaves Liverpool
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2010</span></b> Liverpool FC sold to NESV
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2011</span></b> Liverpool appoint Hodgson
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2011</span></b> Hodgson leaves - Dalglish returns
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2011</span></b> Dalglish signs permanent deal
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2012</span></b> Reds end trophy wait
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2012</span></b> LFC part company with Dalglish
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2012</span></b> Rodgers appointed Liverpool boss
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2014</span></b> Title Heartbreak and Champions League return
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2015</span></b> Reds part company with Rodgers
+        </div>
+        <div class="panel-body">
+            <b><span id="year">2015</span></b> Klopp takes charge at Anfield
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<br><br><br>
+
+
+<div id="carousel-example-generic" class="carousel slide col-md-5" data-ride="carousel" style="margin-bottom: 50px; height: 50%; margin-left:380px;">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="6"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="${pageContext.request.contextPath}/resources/assets/images/s1.jpg" alt="...">
+      <div class="carousel-caption">
+        <h3>King Kenny</h3>
+        <p>lifting the carling cup during his time.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="${pageContext.request.contextPath}/resources/assets/images/s2.jpg" alt="...">
+      <div class="carousel-caption">
+        <h3>Steven Gerrard and Carragher</h3>
+        <p>lifting the carling cup.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="${pageContext.request.contextPath}/resources/assets/images/s3.jpg" alt="...">
+      <div class="carousel-caption">
+        <h3>Another glorious</h3>
+        <p>moment for Liverpool</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="${pageContext.request.contextPath}/resources/assets/images/s6.jpg" alt="...">
+      <div class="carousel-caption">
+        <h3>Reds Wins</h3>
+        <p>again in the Finals</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</div>
+
+        <!-- main -->
+        <br><br><br><br><br><br>
+        <!-- FOOTER -->
+        <img src="${pageContext.request.contextPath}/resources/assets/images/YNWA.jpg" width="100%">
+        <footer class="footer-distributed">
+
+            <div class="footer-left">
+
+                <img src="${pageContext.request.contextPath}/resources/assets/images/lfc_logo.png">
+
+                <p class="footer-links">
+                    <a href="#">Home</a>
+                    ·
+                    <a href="#">Blog</a>
+                    ·
+                    <a href="#">Pricing</a>
+                    ·
+                    <a href="#">About</a>
+                    ·
+                    <a href="#">Faq</a>
+                    ·
+                    <a href="#">Contact</a>
+                </p>
+
+                <p class="footer-company-name">© Copyright 2016 The Liverpool Football Club and Athletic Grounds Limited. All rights reserved.</p>
+            </div>
+
+            <div class="footer-center">
+
+                <div>
+                    <i class="fa fa-map-marker"></i>
+                    <p><span>Anfield</span> Liverpool, United Kingdom</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-phone"></i>
+                    <p>+1 555 123456</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p><a href="mailto:support@company.com">support@liverpool.uk</a></p>
+                </div>
+
+            </div>
+
+            <div class="footer-right">
+
+                <p class="footer-company-about">
+                    <span>Developed and maintained by Deepak, Ashish, Shruti, Mughda</span>
+                    Match Statistics supplied by Opta Sports Data Limited. Reproduced under licence from Football DataCo Limited. All rights reserved.
+                </p>
+
+                <div class="footer-icons">
+
+                    <a href="https://www.facebook.com/LiverpoolFC/?fref=ts" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <a href="https://twitter.com/LFC" target="_blank"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/company/203572?trk=tyah&trkInfo=clickedVertical%3Acompany%2CclickedEntityId%3A203572%2Cidx%3A2-1-4%2CtarId%3A1471229760299%2Ctas%3Aliverpool" target="_blank"><i class="fa fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/liverpoolfc/" target="_blank"><i class="fa fa-instagram"></i></a>
+
+                </div>
+
+            </div>
+
+            
+
+        </footer>
+        
+
+    </div>
+
+  </body>
+</html>

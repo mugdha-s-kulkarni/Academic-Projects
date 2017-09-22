@@ -1,0 +1,13 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
+img {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+	opacity: 1;
+}
+.panel img:hover {
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
+	opacity: .5;
+}
